@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock Paper Scissors</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		let selections = ["Rock", "Paper", "Scissors"]
+
+		//old, used for debug
+		//console.log(playerSelection);
+		//console.log(computerSelection);
+		//console.log(playerSelection === computerSelection);
+
+		function playRound(playerSelection, computerSelection) {
+			if (playerSelection === computerSelection) {
+				console.log("It's a tie...");
+			} else if (playerSelection === "Rock") {
+				if (computerSelection === "Scissors") {
+					console.log("You Win!!!");
+				}
+				else {
+					console.log("You lose!!!");
+				}
+			} else if (playerSelection === "Paper") {
+				if (computerSelection === "Rock") {
+					console.log("You Win!!!");
+				}
+				else{
+					console.log("You lose!!!");
+				}
+			} else if (playerSelection === "Scissors") {
+				if (computerSelection === "Paper") {
+					console.log("You Win!!!");
+				}
+				else {
+					console.log("You lose!!!");
+				}
+			}
+		}
+		function playGame() {
+			for (i = 1; i <= 5; i++) {
+				//console.log("Begin" + i);
+				let playerInput = prompt("ROUND" + i + "\nType 1 for Rock\nType 2 for Paper\nType 3 for Scissors");
+				if (!(playerInput == 1 || playerInput == 2 || playerInput == 3)) {
+					alert("Input must be the numer 1, 2, or 3\nClick OK to try again")
+					//i = (i >= 0) ? i-1:i; will never make itself too small anyway
+					i = i-1;
+					//console.log("After parse" + i);
+					continue
+				} else {
+					let playerSelection = selections[playerInput - 1];
+					let computerSelection = selections[(Math.floor(Math.random()*3))];
+					console.log(playerSelection);
+					console.log(computerSelection);
+					console.log(playerSelection === computerSelection);
+					playRound(playerSelection, computerSelection);
+				}
+			}
+		}
+		playGame();
+	</script>
+</body>
+</html>
