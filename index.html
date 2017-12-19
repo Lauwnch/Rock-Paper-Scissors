@@ -8,54 +8,63 @@
 		
 		let selections = ["Rock", "Paper", "Scissors"]
 
-		//old, used for debug
-		//console.log(playerSelection);
-		//console.log(computerSelection);
-		//console.log(playerSelection === computerSelection);
-
-		function playRound(playerSelection, computerSelection) {
+		function checkWinner(playerSelection, computerSelection) {
+			//returns string value of winner
 			if (playerSelection === computerSelection) {
-				console.log("It's a tie...");
+				return("Tie");
 			} else if (playerSelection === "Rock") {
 				if (computerSelection === "Scissors") {
-					console.log("You Win!!!");
+					return("Player");
 				}
 				else {
-					console.log("You lose!!!");
+					return("Computer");
 				}
 			} else if (playerSelection === "Paper") {
 				if (computerSelection === "Rock") {
-					console.log("You Win!!!");
+					return("Player");
 				}
 				else{
-					console.log("You lose!!!");
+					return("Computer");
 				}
 			} else if (playerSelection === "Scissors") {
 				if (computerSelection === "Paper") {
-					console.log("You Win!!!");
+					return("Player");
 				}
 				else {
-					console.log("You lose!!!");
+					return("Computer");
 				}
 			}
 		}
-		function playGame() {
-			for (i = 1; i <= 5; i++) {
-				//console.log("Begin" + i);
-				let playerInput = prompt("ROUND" + i + "\nType 1 for Rock\nType 2 for Paper\nType 3 for Scissors");
-				if (!(playerInput == 1 || playerInput == 2 || playerInput == 3)) {
-					alert("Input must be the numer 1, 2, or 3\nClick OK to try again")
-					//i = (i >= 0) ? i-1:i; will never make itself too small anyway
+
+		function generateComputerSelection() {
+			return selections[(Math.floor(Math.random()*3))];
+		}
+
+		function generatePlayerSelection() {
+			let playerInput = prompt("ROUND" + i + "OF 5" + "\nType 1 for Rock\nType 2 for Paper\nType 3 for Scissors");
+				if (!(playerInput == 1 || playerInput == 2 || playerInput == 3)) { //part of parse that can be done in function
 					i = i-1;
-					//console.log("After parse" + i);
+					alert("Input must be the numer 1, 2, or 3\nClick OK to try again")
+					return
+				} else {
+					return selections[playerInput -1]
+				}
+		}
+
+		function playRound(playerSelection, computerSelection) {
+
+		}
+		function playGame() {
+			for (i = 1; i <= 5; i++) { //adjust i max for number of rounds
+				let playerSelection = generatePlayerSelection();
+				if (playerSelection == undefined) { //parse inputs (need to do in loop, not in function)
 					continue
 				} else {
-					let playerSelection = selections[playerInput - 1];
-					let computerSelection = selections[(Math.floor(Math.random()*3))];
-					console.log(playerSelection);
-					console.log(computerSelection);
-					console.log(playerSelection === computerSelection);
-					playRound(playerSelection, computerSelection);
+					let computerThrow = generateComputerSelection();
+					console.log("Player Throws: " + playerSelection);
+					console.log("Computer Throws: "computerThrow);
+					let winner = checkWinner(playerSelection, computerThrow);
+					console.log("Winner is " + winner);
 				}
 			}
 		}
